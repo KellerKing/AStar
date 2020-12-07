@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace AStar
 {
@@ -15,5 +16,23 @@ namespace AStar
         public int F { get; set; }
 
         public Feld Vorgaenger { get; set; }
+
+
+
+        public static Feld Copy(Feld sourceFeld)
+        {
+            var copiedFeld = new Feld
+            {
+                X = sourceFeld.X,
+                Y = sourceFeld.Y,
+                Feldtyp = sourceFeld.Feldtyp,
+                G = sourceFeld.G,
+                H = sourceFeld.H,
+                F = sourceFeld.F,
+                Vorgaenger = sourceFeld.Vorgaenger
+            };
+
+            return copiedFeld;
+        }
     }
 }
