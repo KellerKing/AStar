@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AStar
@@ -7,8 +8,9 @@ namespace AStar
     public partial class MainForm : Form
     {
         public Action<Feld, Feldtyp> FeldClicked;
-        public Action BtnSchrittClicked;
         public Action BtnZumZiel;
+
+        private List<meinRadioButton> radioButtons;
 
         public MainForm()
         {
@@ -30,37 +32,37 @@ namespace AStar
         public void Feld_Clicked(object sender, EventArgs e)
         {
             var currentFeld = sender as Feld;
-            Feldtyp currentFeldtyp = Feldtyp.Normal;
-
-            if (rbStartfeld.Checked)
-                currentFeldtyp = Feldtyp.AktuellesFeld;
-            else if (rbZielfeld.Checked)
-                currentFeldtyp = Feldtyp.Zielfeld;
-            else if (rbHindernis.Checked)
-                currentFeldtyp = Feldtyp.Hindernis;
+            Feldtyp currentFeldtyp = radioButtons.First(rbButton => rbButton.Checked).Feldtyp;
 
             FeldClicked.Invoke(currentFeld, currentFeldtyp);
         }
 
-        internal void SetStatusSchrittButton(bool aktivStatus)
+        //internal void SetStatusSchrittButton(bool aktivStatus)
+        //{
+        //    btnSchritt.Enabled = aktivStatus;
+        //}
+
+        internal void SetRadioButtons(List<meinRadioButton> radButtons)
         {
-            btnSchritt.Enabled = aktivStatus;
+            this.radioButtons = radButtons;
+            radioButtons.First().Checked = true;
+            this.Controls.AddRange(radButtons.ToArray());
         }
 
-        private void btnSchritt_Click(object sender, EventArgs e)
+        internal void SetZumZielButton(Button zumZielButton)
         {
-            BtnSchrittClicked.Invoke();
+            this.Controls.Add(zumZielButton);
         }
 
         internal void SetzStatusRadioButtons(bool aktivStatus)
         {
-            rbStartfeld.Enabled = aktivStatus;
-            rbZielfeld.Enabled = aktivStatus;
-            rbHindernis.Enabled = aktivStatus;
-            rbNormal.Enabled = aktivStatus;
+            foreach (var radButton in radioButtons)
+            {
+                radButton.Enabled = aktivStatus;
+            }
         }
 
-        private void btnKomplett_Click(object sender, EventArgs e)
+        public void btnKomplett_Click(object sender, EventArgs e)
         {
             BtnZumZiel.Invoke();
         }

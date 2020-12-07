@@ -29,8 +29,8 @@ namespace AStar
 
         public static Tuple<int, int> CalculateWindowSize(int anzahlFelderProAchse, int padding, int feldSize) //TODO: Extra needed space ? 
         {
-            var neededHeight = anzahlFelderProAchse * feldSize + (2 * padding) + 100;
-            var neededWidht = anzahlFelderProAchse * feldSize + (2 * padding) + 250;
+            var neededHeight = anzahlFelderProAchse * feldSize + (2 * padding) + 40;
+            var neededWidht = anzahlFelderProAchse * feldSize + (2 * padding) + 120;
 
             return Tuple.Create(neededWidht, neededHeight);
         }

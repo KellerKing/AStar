@@ -22,7 +22,7 @@ namespace AStar
             return result;
         } //TODO: Machen !
 
-        public static IEnumerable<Feld> GetSurroundingFelder(List<Feld> spielfeld, Feld currentFeld)
+        public static IEnumerable<Feld> GetBetretbareUmliegendeFelder(List<Feld> spielfeld, Feld currentFeld)
         {
             var currentFieldX = currentFeld.X;
             var currentFieldY = currentFeld.Y;
@@ -82,7 +82,7 @@ namespace AStar
         private static int CalculateHScore(Feld feld, Feld zielFeld) //TODO: Was anders als Manhattan nehmen
         {
             return 10 * (Math.Abs(zielFeld.X - feld.X) +
-                        Math.Abs(zielFeld.Y - zielFeld.Y));
+                        Math.Abs(zielFeld.Y - feld.Y));
         }
 
        

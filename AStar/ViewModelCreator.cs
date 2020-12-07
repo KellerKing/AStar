@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace AStar
 {
@@ -32,6 +33,40 @@ namespace AStar
                 Size = new Size(size, size),
                 Feldtyp = Feldtyp.Normal,
                 Text = $"{xInArray} : {yInArray}"
+            };
+        }
+
+
+        public static Button GetZumZielButton(int locationX, int locationY, int padding)
+        {
+            return new Button
+            {
+                Name = "btZumZiel",
+                Text = "Zum Ziel",
+                Location = new Point(locationX, locationY + padding)
+            };
+        }
+
+        public static List<meinRadioButton> GetRadioButtons(int lastButtonXValue, int yValue, int padding)
+        {
+            var output = new List<meinRadioButton>();
+            string[] name = new string[] { "Startfeld", "Zielfeld", "Hindernis", "Normal" };
+            Feldtyp[] feldtyp = new Feldtyp[] { Feldtyp.AktuellesFeld, Feldtyp.Zielfeld, Feldtyp.Hindernis, Feldtyp.Normal };
+
+            for (int i = 0; i < name.Length; i++)
+                output.Add(CreateRadioButton(lastButtonXValue + padding, yValue + (i * padding), name[i],feldtyp[i]));
+
+            return output;
+        }
+
+        private static meinRadioButton CreateRadioButton(int x, int y, string name, Feldtyp feldtyp)
+        {
+            return new meinRadioButton
+            {
+                Name = "rb" + name,
+                Location = new Point(x, y),
+                Text = name,
+                Feldtyp = feldtyp
             };
         }
     }
