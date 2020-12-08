@@ -32,7 +32,6 @@ namespace AStar
         Location = new Point(xInArray * size + padding, yInArray * size + padding),
         Size = new Size(size, size),
         Feldtyp = Feldtyp.Normal,
-        Text = $"{xInArray} : {yInArray}"
       };
     }
 
