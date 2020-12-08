@@ -35,7 +35,6 @@ namespace AStar
       };
     }
 
-
     public static List<Button> GetButtons(int locationX, int locationY, int padding)
     {
       return new List<Button>

@@ -38,10 +38,12 @@ namespace AStar
       FeldClicked.Invoke(currentFeld, currentFeldtyp);
     }
 
-    //internal void SetStatusSchrittButton(bool aktivStatus)
-    //{
-    //    btnSchritt.Enabled = aktivStatus;
-    //}
+    public static DialogResult ZeigeSpielBeendenDialog(string ausgabenachricht)
+    {
+      MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+      DialogResult result = MessageBox.Show(ausgabenachricht,"", buttons);
+      return result;
+    }
 
     internal void SetRadioButtons(List<meinRadioButton> radButtons)
     {

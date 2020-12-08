@@ -50,7 +50,7 @@ namespace AStar
       return spielfeld;
     }
 
-    public static void FormatPfad(List<Feld> derPfad)
+    public static void FormatiereFinalenPfad(List<Feld> derPfad)
     {
       derPfad.ForEach(feld =>
       {

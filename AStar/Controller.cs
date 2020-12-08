@@ -69,7 +69,7 @@ namespace AStar
       Application.Restart();
     }
 
-    private void BtnZumZielClicked()
+    private async void BtnZumZielClicked()
     {
       var startfeld = m_Spielfeld.FirstOrDefault(feld => feld.Feldtyp == Feldtyp.AktuellesFeld);
       var zielfeld = m_Spielfeld.FirstOrDefault(feld => feld.Feldtyp == Feldtyp.Zielfeld);
@@ -77,7 +77,9 @@ namespace AStar
       if (startfeld == null || zielfeld == null) return;
 
       //TODO: Wie geht es weiter ? 
-      Task.Run(() => Pfadfinder.GeheKomplettenWeg(m_Spielfeld, m_OpenList, m_ClosedList, startfeld, zielfeld));
+      var zielsucheErgebnis = await Task.Run(() => Pfadfinder.GeheKomplettenWeg(m_Spielfeld, m_OpenList, m_ClosedList, startfeld, zielfeld));
+
+      MessageBox.Show(zielsucheErgebnis.Ausgabetext); //TODO: Hier das dann auslagern
     }
   }
 }
