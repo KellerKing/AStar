@@ -18,7 +18,6 @@ namespace AStar
                 var grenzendeFelder = AStar.GetBetretbareUmliegendeFelder(spielfeld, currentFeld).ToList();
                 var grenzendeFelderAußerhalbClosedList = EntferneGrenzendeFelderDieBereitsInClosedListSind(closedList, grenzendeFelder);
                 BerechnePfadKostenUndSetzeVorgaenger(grenzendeFelderAußerhalbClosedList, currentFeld, zielfeld);
-                // openList.AddRange(grenzendeFelderAußerhalbClosedList);
                 openList = FuegeFelderAusserhalbOpenListDieserHinzu(openList, grenzendeFelderAußerhalbClosedList);
 
                 var neueListen = AddCurrentFeldZurClosedListUndEntferneVonOpenList(closedList, openList);
@@ -28,22 +27,12 @@ namespace AStar
             }
 
             //Schleife vom Zielfeld immer weiter auf den Vorgänger bis es Startfeld ist.
-            while(currentFeld.Vorgaenger != null)
+            while(currentFeld.Vorgaenger.Vorgaenger != null)
             {
                 var vorgaenger = currentFeld.Vorgaenger;
                 vorgaenger.BackColor = Color.Blue;
                 currentFeld = vorgaenger;
             }
-
-
-        }
-
-        private static void Einzelschritt(List<Feld> spielfeld, List<Feld> openList, List<Feld> closedList, Feld aktuellesFeld)
-        {
-            openList.Add(aktuellesFeld);
-            var grenzendeFelder = AStar.GetBetretbareUmliegendeFelder(spielfeld, aktuellesFeld).ToList();
-            var grenzendeFelderAußerhalbClosedList = EntferneGrenzendeFelderDieBereitsInClosedListSind(closedList, grenzendeFelder); //TODO: Lieber mit Enum Filtern
-
         }
 
         private static List<Feld> FuegeFelderAusserhalbOpenListDieserHinzu(List<Feld> openList, List<Feld> grenzendeFelder)
@@ -140,7 +129,6 @@ namespace AStar
 
         public static Feld GetGuengstigstesFeld(List<Feld> openList)
         {
-            Debug.Print(openList.OrderBy(feld => feld.F).First().Text);
             return openList.OrderBy(feld => feld.F).First();
         }
     }
