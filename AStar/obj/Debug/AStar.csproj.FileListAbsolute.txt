@@ -58,3 +58,23 @@ H:\Projekt\Neu - Copy\AStar\AStar\obj\Debug\AStar.pdb
 H:\Projekt\Neu - Copy\AStar\AStar\bin\Debug\AStar.exe.config
 H:\Projekt\Neu - Copy\AStar\AStar\bin\Debug\AStar.exe
 H:\Projekt\Neu - Copy\AStar\AStar\bin\Debug\AStar.pdb
+H:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\bin\Debug\AStar.exe.config
+H:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\bin\Debug\AStar.exe
+H:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\bin\Debug\AStar.pdb
+H:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.csprojAssemblyReference.cache
+H:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.MainForm.resources
+H:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.Properties.Resources.resources
+H:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.csproj.GenerateResource.cache
+H:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.csproj.CoreCompileInputs.cache
+H:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.exe
+H:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.pdb
+D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\bin\Debug\AStar.exe.config
+D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\bin\Debug\AStar.exe
+D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\bin\Debug\AStar.pdb
+D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.csprojAssemblyReference.cache
+D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.MainForm.resources
+D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.Properties.Resources.resources
+D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.csproj.GenerateResource.cache
+D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.csproj.CoreCompileInputs.cache
+D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.exe
+D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.pdb
