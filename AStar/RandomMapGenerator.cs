@@ -34,7 +34,7 @@ namespace AStar
 
     private static void setRandomHindernisse(List<Feld> spielfeld, int hindernisrateInProzent, Random r)
     {
-      var anzahlDerHindenisse =  hindernisrateInProzent * 100 / spielfeld.Count;
+      var anzahlDerHindenisse = Math.Round(((double)spielfeld.Count / 100) * hindernisrateInProzent);
       Feld zuFormatierendesFeld;
 
       for (int i = 0; i < anzahlDerHindenisse; i++)

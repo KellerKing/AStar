@@ -31,7 +31,7 @@ namespace AStar
 
       var formSize = Helper.CalculateWindowSize(Convert.ToInt32(Math.Sqrt(m_Spielfeld.Count)), 20, 25); //TODO Naming und Klasse mit Groeßsen.
       //TODO: Nur ein Test
-      RandomMapGenerator.GenerateRandomMap(m_Spielfeld, 90); 
+      RandomMapGenerator.GenerateRandomMap(m_Spielfeld, 30); 
 
       SetzeUIFelder(uiButtons, formSize, radButtons);
       ConnectEvents(uiButtons);
