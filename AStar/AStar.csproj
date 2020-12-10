@@ -57,6 +57,7 @@
     <Compile Include="meinRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RandomMapGenerator.cs" />
     <Compile Include="Transferobjekte\ListenUpdateDTO.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

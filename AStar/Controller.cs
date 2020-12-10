@@ -30,6 +30,8 @@ namespace AStar
       var uiButtons = ViewModelCreator.GetButtons(radButtons.Last().Location.X, radButtons.Last().Location.Y, 40);
 
       var formSize = Helper.CalculateWindowSize(Convert.ToInt32(Math.Sqrt(m_Spielfeld.Count)), 20, 25); //TODO Naming und Klasse mit Groeßsen.
+      //TODO: Nur ein Test
+     // RandomMapGenerator.GenerateRandomMap(m_Spielfeld, 90); 
 
       SetzeUIFelder(uiButtons, formSize, radButtons);
       ConnectEvents(uiButtons);

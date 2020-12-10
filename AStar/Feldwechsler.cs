@@ -20,7 +20,7 @@ namespace AStar
           FormatSpecialFeld(spielfeld, currentFeld, currentFeldtyp);
     }
 
-    private static List<Feld> FormatSpecialFeld(List<Feld> spielfeld, Feld currentFeld, Feldtyp currentFeldtyp) //TODO: Komplettes Rework 
+    public static List<Feld> FormatSpecialFeld(List<Feld> spielfeld, Feld currentFeld, Feldtyp currentFeldtyp) //TODO: Komplettes Rework 
     {
       currentFeld.Feldtyp = currentFeldtyp;
 
@@ -36,14 +36,14 @@ namespace AStar
       return spielfeld;
     }
 
-    private static List<Feld> AddHindernis(List<Feld> spielfeld, Feld currentFeld)
+    public static List<Feld> AddHindernis(List<Feld> spielfeld, Feld currentFeld)
     {
       currentFeld.BackColor = Color.Gray;
       currentFeld.Feldtyp = Feldtyp.Hindernis;
       return spielfeld;
     }
 
-    private static List<Feld> ResetFeld(List<Feld> spielfeld, Feld currentFeld)
+    public static List<Feld> ResetFeld(List<Feld> spielfeld, Feld currentFeld)
     {
       currentFeld.BackColor = Color.AliceBlue;
       currentFeld.Feldtyp = Feldtyp.Normal;
