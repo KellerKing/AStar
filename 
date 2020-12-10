@@ -1,0 +1,62 @@
+[33mcommit a285c13eb0ba6f4c1336e7e135e98930266c1856[m[33m ([m[1;36mHEAD -> [m[1;32mfeature[m[33m)[m
+Author: Luca Keller <Andreasks56@gmail.com>
+Date:   Thu Dec 10 15:15:49 2020 +0100
+
+    Naja
+
+[33mcommit e3da0723a47334f08ceca6eea5310ec44d4fb217[m[33m ([m[1;31morigin/feature[m[33m)[m
+Author: Luca Keller <Andreasks56@gmail.com>
+Date:   Tue Dec 8 19:19:34 2020 +0100
+
+    Es wird jetzt erkannt wann es keinen Pfad mehr gibt, und es wird eine jeweilige Ausgabe nachricht angezeigt
+
+[33mcommit c998102bc63090c3ee9519835a53c954df41fbac[m
+Author: Luca Keller <Andreasks56@gmail.com>
+Date:   Tue Dec 8 15:17:14 2020 +0100
+
+    Akuteller Funktionierender Stand vor großem refactoring. Es kommt ein Fehler wenn das Ziel nicht erreicht werden kann. Daher wird bald ein besserer Check INtegriert
+
+[33mcommit 1479ec85a88051abbd1d2ffbe78c72c9ce639975[m
+Author: Luca Keller <Andreasks56@gmail.com>
+Date:   Tue Dec 8 14:39:07 2020 +0100
+
+    Code leicht refactoring
+
+[33mcommit ba7f8942424c872c087aa298e153f2bf7b4e46ec[m
+Author: Luca Keller <Andreasks56@gmail.com>
+Date:   Mon Dec 7 15:57:49 2020 +0100
+
+    Neustart Button hinzugefügt
+
+[33mcommit b3545989f0c9efd8d9d5bc987d2f2b81cb9224df[m
+Merge: 694d342 97ba830
+Author: KellerKing <45260098+KellerKing@users.noreply.github.com>
+Date:   Mon Dec 7 15:38:04 2020 +0100
+
+    Merge pull request #1 from KellerKing/master
+    
+    Master
+
+[33mcommit 97ba830877a41dd8f1fa25a942309248bb1120f9[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Luca Keller <Andreasks56@gmail.com>
+Date:   Mon Dec 7 15:29:40 2020 +0100
+
+     asd
+
+[33mcommit 2d02c4d72368f44d37f27f583c2b032f9ffd4943[m
+Author: Luca Keller <Andreasks56@gmail.com>
+Date:   Mon Dec 7 15:26:09 2020 +0100
+
+     asd
+
+[33mcommit 5071209f39aa83a41a27367f8c3b33951fc8ef00[m
+Author: Luca Keller <Andreasks56@gmail.com>
+Date:   Mon Dec 7 15:15:45 2020 +0100
+
+    Aktueller Stand
+
+[33mcommit 694d342088763491a2abd06339bf3530543d0275[m
+Author: Luca Keller <Andreasks56@gmail.com>
+Date:   Mon Dec 7 14:50:34 2020 +0100
+
+    Funktionierender stand AStar

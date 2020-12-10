@@ -32,7 +32,8 @@ namespace AStar
         zielgefundenPruefergebnis = AStar.CheckIfZielGefunden(openList, zielfeld);
 
       }
-      Feldwechsler.FormatiereFinalenPfad(GetFinalenPfad(currentFeld));
+      var derFinalePfad = GetFinalenPfad(currentFeld);
+      Feldwechsler.FormatiereFinalenPfad(derFinalePfad);
 
       return zielgefundenPruefergebnis;
     }
@@ -43,7 +44,8 @@ namespace AStar
 
       while(lastFeld.Vorgaenger != null)
       {
-        output.Add(lastFeld);  
+        output.Add(lastFeld);
+        lastFeld = lastFeld.Vorgaenger;
       }
       return output;
     }
