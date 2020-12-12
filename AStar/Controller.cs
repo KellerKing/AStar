@@ -35,7 +35,7 @@ namespace AStar
       ConnectEvents(uiButtons);
     }
 
-    private void SetzeUIFelder(List<Button> uiButtons, Tuple<int, int> formSize, List<meinRadioButton> radButtons)
+    private void SetzeUIFelder(List<Button> uiButtons, Tuple<int, int> formSize, List<MeinRadioButton> radButtons)
     {
       m_MainForm.SetButtons(uiButtons);
       m_MainForm.SetWindowSize(formSize.Item1, formSize.Item2);
@@ -67,7 +67,6 @@ namespace AStar
     {
       var kopieSpielfeld = new List<Feld>(m_Spielfeld);
       m_Spielfeld = FeldFormatierer.SetSpecialFeld(kopieSpielfeld, currentFeld, currentFeldtyp);
-      var isStartBereit = Helper.IsNeededFelderGesetzt(kopieSpielfeld);
     }
     private void BtnClearClicked()
     {

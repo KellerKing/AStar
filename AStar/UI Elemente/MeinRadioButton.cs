@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace AStar
 {
-  public class meinRadioButton : RadioButton
+  public class MeinRadioButton : RadioButton
   {
     public Feldtyp Feldtyp { get; set; }
   }

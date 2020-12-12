@@ -12,7 +12,7 @@ namespace AStar
     public Action ClearButtonClicked;
     public Action BtnZufaelligesSpielfedClicked;
 
-    private List<meinRadioButton> radioButtons;
+    private List<MeinRadioButton> radioButtons;
 
     public MainForm()
     {
@@ -46,7 +46,7 @@ namespace AStar
       return result;
     }
 
-    internal void SetRadioButtons(List<meinRadioButton> radButtons)
+    internal void SetRadioButtons(List<MeinRadioButton> radButtons)
     {
       this.radioButtons = radButtons;
       radioButtons.First().Checked = true;

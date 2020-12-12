@@ -22,9 +22,6 @@ namespace AStar
           return true;
       }
       return false;
-
-      // return spielfeld.Where(x => x.Feldtyp == Feldtyp.Startfeld || x.Feldtyp == Feldtyp.Zielfeld).Count() != 2;
-      //return spielfeld.Any(x => x.Feldtyp == Feldtyp.Startfeld) && spielfeld.Any(x => x.Feldtyp == Feldtyp.Zielfeld);
     }
 
     public static Tuple<int, int> CalculateWindowSize(int anzahlFelderProAchse, int padding, int feldSize) //TODO: Extra needed space ? 
@@ -55,13 +52,6 @@ namespace AStar
         feld.Feldtyp = Feldtyp.Normal;
       }
       return m_Spielfeld;
-    }
-
-    public static void ResetGame(List<Feld> spielfeld, List<Feld> openList, List<Feld> closedList)
-    {
-      ResetSpielfeld(spielfeld);
-      openList.Clear();
-      closedList.Clear();
     }
   }
 }

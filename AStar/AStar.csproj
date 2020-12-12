@@ -53,8 +53,8 @@
     <Compile Include="Konstanten\Feldtyp.cs" />
     <Compile Include="FeldFormatierer.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="Logik\PathScoreDTO.cs" />
-    <Compile Include="meinRadioButton.cs">
+    <Compile Include="Transferobjekte\PathScoreDTO.cs" />
+    <Compile Include="UI Elemente\MeinRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="RandomMapGenerator.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Feld.cs">
+    <Compile Include="UI Elemente\Feld.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Logik\Pfadfinder.cs" />

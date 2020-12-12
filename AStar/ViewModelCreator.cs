@@ -66,9 +66,9 @@ namespace AStar
       };
     }
 
-    public static List<meinRadioButton> GetRadioButtons(int lastButtonXValue, int yValue, int padding)
+    public static List<MeinRadioButton> GetRadioButtons(int lastButtonXValue, int yValue, int padding)
     {
-      var output = new List<meinRadioButton>();
+      var output = new List<MeinRadioButton>();
       string[] name = new string[] { "Startfeld", "Zielfeld", "Hindernis", "Normal" };
       Feldtyp[] feldtyp = new Feldtyp[] { Feldtyp.AktuellesFeld, Feldtyp.Zielfeld, Feldtyp.Hindernis, Feldtyp.Normal };
 
@@ -78,9 +78,9 @@ namespace AStar
       return output;
     }
 
-    private static meinRadioButton CreateRadioButton(int x, int y, string name, Feldtyp feldtyp)
+    private static MeinRadioButton CreateRadioButton(int x, int y, string name, Feldtyp feldtyp)
     {
-      return new meinRadioButton
+      return new MeinRadioButton
       {
         Name = "rb" + name,
         Location = new Point(x, y),
