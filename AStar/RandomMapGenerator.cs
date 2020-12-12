@@ -8,13 +8,14 @@ namespace AStar
 {
   class RandomMapGenerator
   {
-    public static void GenerateRandomMap(List<Feld> spielfeld, int hindernisrateInProzent) //TODO: Rework alles
+    public static List<Feld> GenerateRandomMap(List<Feld> spielfeld, int hindernisrateInProzent) //TODO: Rework alles
     {
       var r = new Random();
 
       SetRandomStartOderZielfeld(spielfeld, r, Feldtyp.AktuellesFeld);
       SetRandomStartOderZielfeld(spielfeld, r, Feldtyp.Zielfeld);
       setRandomHindernisse(spielfeld, hindernisrateInProzent, r);
+      return spielfeld;
     }
 
     private static void SetRandomStartOderZielfeld(List<Feld> spielfeld, Random r, Feldtyp feldtyp)
@@ -29,7 +30,7 @@ namespace AStar
 
       } while (zuFormatierendesFeld.Feldtyp != Feldtyp.Normal);
 
-      Feldwechsler.SetSpecialFeld(spielfeld, zuFormatierendesFeld, feldtyp);
+      FeldFormatierer.SetSpecialFeld(spielfeld, zuFormatierendesFeld, feldtyp);
     }
 
     private static void setRandomHindernisse(List<Feld> spielfeld, int hindernisrateInProzent, Random r)
@@ -47,7 +48,7 @@ namespace AStar
 
         } while (zuFormatierendesFeld.Feldtyp != Feldtyp.Normal);
 
-        Feldwechsler.AddHindernis(spielfeld, zuFormatierendesFeld);
+        FeldFormatierer.FormatiereAlsHindernis(spielfeld, zuFormatierendesFeld);
       }
     }
   }

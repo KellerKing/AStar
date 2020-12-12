@@ -51,7 +51,7 @@
     <Compile Include="Logik\AStar.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Konstanten\Feldtyp.cs" />
-    <Compile Include="Feldwechsler.cs" />
+    <Compile Include="FeldFormatierer.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Logik\PathScoreDTO.cs" />
     <Compile Include="meinRadioButton.cs">

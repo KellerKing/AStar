@@ -10,6 +10,7 @@ namespace AStar
     public Action<Feld, Feldtyp> FeldClicked;
     public Action ZumZielButtonClicked;
     public Action ClearButtonClicked;
+    public Action BtnZufaelligesSpielfedClicked;
 
     private List<meinRadioButton> radioButtons;
 
@@ -52,14 +53,9 @@ namespace AStar
       this.Controls.AddRange(radButtons.ToArray());
     }
 
-    internal void SetZumZielButton(Button zumZielButton)
+    public void SetButtons(List<Button> dieButtons)
     {
-      this.Controls.Add(zumZielButton);
-    }
-
-    public void SetClearButton(Button clearButton)
-    {
-      this.Controls.Add(clearButton);
+      this.Controls.AddRange(dieButtons.ToArray());
     }
 
     internal void SetzStatusRadioButtons(bool aktivStatus)
@@ -78,6 +74,11 @@ namespace AStar
     public void btnClear_Click(object sender, EventArgs e)
     {
       ClearButtonClicked.Invoke();
+    }
+
+    public void btnZufaelligesSpielfed_Click(object sender, EventArgs e)
+    {
+      BtnZufaelligesSpielfedClicked.Invoke();
     }
   }
 }

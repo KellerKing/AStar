@@ -54,6 +54,14 @@ namespace AStar
           Location = new Point(locationX, locationY + padding + 25),
           Size = new Size(80,25),
           TextAlign = ContentAlignment.MiddleCenter
+        },
+        new Button
+        {
+          Name = "btnZufaelligesSpielfeld",
+          Text = "Zufall",
+          Location = new Point(locationX, locationY + padding *2 + 50),
+          Size = new Size(80,25),
+          TextAlign = ContentAlignment.MiddleCenter
         }
       };
     }

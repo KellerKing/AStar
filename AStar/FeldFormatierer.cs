@@ -4,23 +4,23 @@ using System.Linq;
 
 namespace AStar
 {
-  class Feldwechsler
+  class FeldFormatierer
   {
     public static List<Feld> SetSpecialFeld(List<Feld> spielfeld, Feld currentFeld, Feldtyp currentFeldtyp)
     {
       if (currentFeldtyp == Feldtyp.Hindernis)
-        return AddHindernis(spielfeld, currentFeld);
+        return FormatiereAlsHindernis(spielfeld, currentFeld);
       else if (currentFeldtyp == Feldtyp.Normal)
-        return ResetFeld(spielfeld, currentFeld);
+        return FormatiereAlsStandardfeld(spielfeld, currentFeld);
 
       var oldSpecialFeld = spielfeld.FirstOrDefault(feld => feld.Feldtyp == currentFeldtyp);
 
       return oldSpecialFeld != null ?
-          FormatSpecialFeld(ResetFeld(spielfeld, oldSpecialFeld), currentFeld, currentFeldtyp) :
-          FormatSpecialFeld(spielfeld, currentFeld, currentFeldtyp);
+          FormatiereStartOderZielfeld(FormatiereAlsStandardfeld(spielfeld, oldSpecialFeld), currentFeld, currentFeldtyp) :
+          FormatiereStartOderZielfeld(spielfeld, currentFeld, currentFeldtyp);
     }
 
-    public static List<Feld> FormatSpecialFeld(List<Feld> spielfeld, Feld currentFeld, Feldtyp currentFeldtyp) //TODO: Komplettes Rework 
+    public static List<Feld> FormatiereStartOderZielfeld(List<Feld> spielfeld, Feld currentFeld, Feldtyp currentFeldtyp) //TODO: Komplettes Rework 
     {
       currentFeld.Feldtyp = currentFeldtyp;
 
@@ -36,14 +36,14 @@ namespace AStar
       return spielfeld;
     }
 
-    public static List<Feld> AddHindernis(List<Feld> spielfeld, Feld currentFeld)
+    public static List<Feld> FormatiereAlsHindernis(List<Feld> spielfeld, Feld currentFeld)
     {
       currentFeld.BackColor = Color.Gray;
       currentFeld.Feldtyp = Feldtyp.Hindernis;
       return spielfeld;
     }
 
-    public static List<Feld> ResetFeld(List<Feld> spielfeld, Feld currentFeld)
+    public static List<Feld> FormatiereAlsStandardfeld(List<Feld> spielfeld, Feld currentFeld)
     {
       currentFeld.BackColor = Color.AliceBlue;
       currentFeld.Feldtyp = Feldtyp.Normal;
@@ -59,5 +59,9 @@ namespace AStar
       });
     }
 
+    //public static void FormatiereBerechneteFelder(List<Feld> openList)
+    //{
+    //  openList.Where(feld => feld.Feldtyp != Feldtyp.Zielfeld).ToList().ForEach(feld => feld.BackColor = Color.Yellow);
+    //}
   }
 }

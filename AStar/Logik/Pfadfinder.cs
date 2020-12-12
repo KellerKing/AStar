@@ -19,7 +19,7 @@ namespace AStar
       while (zielgefundenPruefergebnis.ZielsuchErgebnis == ZielsuchErgebnis.NichtGefunden)//TODO: Next STep
       {
         currentFeld = GetGuengstigstesFeld(openList);
-        Helper.FormatAktuellesFeld(currentFeld);
+        currentFeld.Feldtyp = Feldtyp.AktuellesFeld;
         var grenzendeFelder = AStar.GetBetretbareUmliegendeFelder(spielfeld, currentFeld).ToList();
         var grenzendeFelderAußerhalbClosedList = EntferneGrenzendeFelderDieBereitsInClosedListSind(closedList, grenzendeFelder);
         BerechnePfadKostenUndSetzeVorgaenger(grenzendeFelderAußerhalbClosedList, currentFeld, zielfeld);
@@ -33,7 +33,8 @@ namespace AStar
 
       }
       var derFinalePfad = GetFinalenPfad(currentFeld);
-      Feldwechsler.FormatiereFinalenPfad(derFinalePfad);
+      FeldFormatierer.FormatiereFinalenPfad(derFinalePfad);
+      //FeldFormatierer.FormatiereBerechneteFelder(openList);
 
       return zielgefundenPruefergebnis;
     }
