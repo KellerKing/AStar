@@ -6,21 +6,29 @@ namespace AStar
 {
   class FeldFormatierer
   {
-    public static List<Feld> SetSpecialFeld(List<Feld> spielfeld, Feld currentFeld, Feldtyp currentFeldtyp)
+    public static void SetSpecialFeld(List<Feld> spielfeld, Feld currentFeld, Feldtyp currentFeldtyp)
     {
       if (currentFeldtyp == Feldtyp.Hindernis)
-        return FormatiereAlsHindernis(spielfeld, currentFeld);
+      {
+        FormatiereAlsHindernis(currentFeld);
+      }
       else if (currentFeldtyp == Feldtyp.Normal)
-        return FormatiereAlsStandardfeld(spielfeld, currentFeld);
+      {
+        FormatiereAlsStandardfeld(currentFeld);
+      }
+      else
+      {
+        var oldSpecialFeld = spielfeld.FirstOrDefault(feld => feld.Feldtyp == currentFeldtyp);
 
-      var oldSpecialFeld = spielfeld.FirstOrDefault(feld => feld.Feldtyp == currentFeldtyp);
-
-      return oldSpecialFeld != null ?
-          FormatiereStartOderZielfeld(FormatiereAlsStandardfeld(spielfeld, oldSpecialFeld), currentFeld, currentFeldtyp) :
-          FormatiereStartOderZielfeld(spielfeld, currentFeld, currentFeldtyp);
+        if (oldSpecialFeld != null)
+        {
+          FormatiereAlsStandardfeld(oldSpecialFeld);
+        }
+        FormatiereStartOderZielfeld(currentFeld, currentFeldtyp);
+      }
     }
 
-    public static List<Feld> FormatiereStartOderZielfeld(List<Feld> spielfeld, Feld currentFeld, Feldtyp currentFeldtyp) //TODO: Komplettes Rework 
+    public static void FormatiereStartOderZielfeld(Feld currentFeld, Feldtyp currentFeldtyp) //TODO: Komplettes Rework 
     {
       currentFeld.Feldtyp = currentFeldtyp;
 
@@ -33,21 +41,18 @@ namespace AStar
           currentFeld.BackColor = Color.Green;
           break;
       }
-      return spielfeld;
     }
 
-    public static List<Feld> FormatiereAlsHindernis(List<Feld> spielfeld, Feld currentFeld)
+    public static void FormatiereAlsHindernis(Feld currentFeld)
     {
       currentFeld.BackColor = Color.Gray;
       currentFeld.Feldtyp = Feldtyp.Hindernis;
-      return spielfeld;
     }
 
-    public static List<Feld> FormatiereAlsStandardfeld(List<Feld> spielfeld, Feld currentFeld)
+    public static void FormatiereAlsStandardfeld(Feld currentFeld)
     {
       currentFeld.BackColor = Color.AliceBlue;
       currentFeld.Feldtyp = Feldtyp.Normal;
-      return spielfeld;
     }
 
     public static void FormatiereFinalenPfad(List<Feld> derPfad)

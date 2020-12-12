@@ -65,8 +65,7 @@ namespace AStar
 
     private void StatusFeldSetzen(Feld currentFeld, Feldtyp currentFeldtyp)
     {
-      var kopieSpielfeld = new List<Feld>(m_Spielfeld);
-      m_Spielfeld = FeldFormatierer.SetSpecialFeld(kopieSpielfeld, currentFeld, currentFeldtyp);
+      FeldFormatierer.SetSpecialFeld(m_Spielfeld, currentFeld, currentFeldtyp);
     }
     private void BtnClearClicked()
     {

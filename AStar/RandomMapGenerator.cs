@@ -48,7 +48,7 @@ namespace AStar
 
         } while (zuFormatierendesFeld.Feldtyp != Feldtyp.Normal);
 
-        FeldFormatierer.FormatiereAlsHindernis(spielfeld, zuFormatierendesFeld);
+        FeldFormatierer.FormatiereAlsHindernis(zuFormatierendesFeld);
       }
     }
   }
