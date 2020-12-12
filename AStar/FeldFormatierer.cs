@@ -63,10 +63,5 @@ namespace AStar
         feld.Feldtyp = Feldtyp.Pfad;
       });
     }
-
-    //public static void FormatiereBerechneteFelder(List<Feld> openList)
-    //{
-    //  openList.Where(feld => feld.Feldtyp != Feldtyp.Zielfeld).ToList().ForEach(feld => feld.BackColor = Color.Yellow);
-    //}
   }
 }

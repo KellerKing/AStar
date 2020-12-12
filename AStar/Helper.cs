@@ -29,14 +29,13 @@ namespace AStar
       else return false;
     }
 
-    public static List<Feld> ResetSpielfeld(List<Feld> m_Spielfeld) //TODO: Muss ich das wirklich mit Return machen, oder mache ich alles mit byRef
+    public static void ResetSpielfeld(List<Feld> m_Spielfeld) //TODO: Muss ich das wirklich mit Return machen, oder mache ich alles mit byRef
     {
       foreach (var feld in m_Spielfeld)
       {
         feld.BackColor = Color.AliceBlue;
         feld.Feldtyp = Feldtyp.Normal;
       }
-      return m_Spielfeld;
     }
   }
 }

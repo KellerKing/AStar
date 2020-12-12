@@ -14,7 +14,7 @@ namespace AStar
 
       SetRandomStartOderZielfeld(spielfeld, r, Feldtyp.AktuellesFeld);
       SetRandomStartOderZielfeld(spielfeld, r, Feldtyp.Zielfeld);
-      setRandomHindernisse(spielfeld, hindernisrateInProzent, r);
+      SetRandomHindernisse(spielfeld, hindernisrateInProzent, r);
       return spielfeld;
     }
 
@@ -33,7 +33,7 @@ namespace AStar
       FeldFormatierer.SetSpecialFeld(spielfeld, zuFormatierendesFeld, feldtyp);
     }
 
-    private static void setRandomHindernisse(List<Feld> spielfeld, int hindernisrateInProzent, Random r)
+    private static void SetRandomHindernisse(List<Feld> spielfeld, int hindernisrateInProzent, Random r)
     {
       var anzahlDerHindenisse = Math.Round(((double)spielfeld.Count / 100) * hindernisrateInProzent);
       Feld zuFormatierendesFeld;

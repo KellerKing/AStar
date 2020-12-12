@@ -18,16 +18,13 @@ namespace AStar
 
       while (zielgefundenPruefergebnis.ZielsuchErgebnis == ZielsuchErgebnis.NichtGefunden)//TODO: Next STep
       {
-        currentFeld = GetGuengstigstesFeld(openList);
-        currentFeld.Feldtyp = Feldtyp.AktuellesFeld;
-        var grenzendeFelder = AStar.GetBetretbareUmliegendeFelder(spielfeld, currentFeld).ToList();
+        currentFeld = GetNeuesAktuellesFeld(openList);
+        var grenzendeFelder = AStar.GetBetretbareUmliegendeFelder(spielfeld, currentFeld);
         var grenzendeFelderAußerhalbClosedList = EntferneGrenzendeFelderDieBereitsInClosedListSind(closedList, grenzendeFelder);
+ 
         BerechnePfadKostenUndSetzeVorgaenger(grenzendeFelderAußerhalbClosedList, currentFeld, zielfeld);
-        openList = FuegeFelderAusserhalbOpenListDieserHinzu(openList, grenzendeFelderAußerhalbClosedList);
-
-        var neueListen = AddCurrentFeldZurClosedListUndEntferneVonOpenList(closedList, openList);
-        openList = neueListen.OpenList;
-        closedList = neueListen.ClosedList;
+        FuegeFelderAusserhalbOpenListDieserHinzu(openList, grenzendeFelderAußerhalbClosedList);
+        AddCurrentFeldZurClosedListUndEntferneVonOpenList(closedList, openList);
 
         zielgefundenPruefergebnis = AStar.CheckIfZielGefunden(openList, zielfeld);
 
@@ -51,26 +48,13 @@ namespace AStar
       return output;
     }
 
-    private static List<Feld> FuegeFelderAusserhalbOpenListDieserHinzu(List<Feld> openList, List<Feld> grenzendeFelder)
+    private static void FuegeFelderAusserhalbOpenListDieserHinzu(List<Feld> openList, List<Feld> grenzendeFelder)
     {
 
       var eintraegeAusserhalbOpenList = new List<Feld>();
 
       grenzendeFelder.ForEach(x => { if (!openList.Contains(x)) eintraegeAusserhalbOpenList.Add(x); });
       openList.AddRange(eintraegeAusserhalbOpenList);
-      return openList;
-
-      var kopieListe = new List<Feld>(openList);
-
-      for (int i = 0; i < kopieListe.Count; i++)
-      {
-        var eintrag = openList.Where(f => kopieListe[i] == f);
-
-        if (eintrag.ToList().Count > 1)
-          openList.Remove(eintrag.First());
-      }
-
-      return openList;
     }
 
     private static List<Feld> EntferneGrenzendeFelderDieBereitsInClosedListSind(List<Feld> closedList, List<Feld> grenzendeFelder)
@@ -114,38 +98,23 @@ namespace AStar
       }
     }
 
-    public static List<Feld> GetVorhandeneFelderInOpenList(List<Feld> openList, List<Feld> felderZuDursuchen)
-    {
-      List<Feld> output = new List<Feld>();
-
-      felderZuDursuchen.ForEach(feld =>
-      {
-        if (openList.Any(list => list.X == feld.X && list.Y == feld.Y))
-          output.Add(feld);
-      });
-
-      return output;
-
-    }
-
-    public static ListenUpdateDTO AddCurrentFeldZurClosedListUndEntferneVonOpenList(List<Feld> closedList, List<Feld> openList)
+    public static void AddCurrentFeldZurClosedListUndEntferneVonOpenList(List<Feld> closedList, List<Feld> openList)
     {
 
       var currentFeld = openList.First(f => f.Feldtyp == Feldtyp.AktuellesFeld);
       currentFeld.Feldtyp = Feldtyp.Normal;
       closedList.Add(currentFeld);
       openList.Remove(currentFeld);
-
-      return new ListenUpdateDTO
-      {
-        ClosedList = closedList,
-        OpenList = openList
-      };
     }
 
-    public static Feld GetGuengstigstesFeld(List<Feld> openList)
+    public static Feld GetNeuesAktuellesFeld(List<Feld> openList)
     {
-      return openList.OrderBy(feld => feld.F).FirstOrDefault();
+      var nextBestFeld = openList.OrderBy(feld => feld.F).FirstOrDefault();
+      
+      if(nextBestFeld != null)
+        nextBestFeld.Feldtyp = Feldtyp.AktuellesFeld;
+      
+      return nextBestFeld;
     }
   }
 }

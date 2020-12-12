@@ -59,7 +59,7 @@ namespace AStar
 
     private void SetZufaelligesFeld()
     {
-      m_Spielfeld = Helper.ResetSpielfeld(new List<Feld>(m_Spielfeld));
+      //TODO: Oder auch nur als ref
       m_Spielfeld = RandomMapGenerator.GenerateRandomMap(new List<Feld>(m_Spielfeld), 50);
     }
 

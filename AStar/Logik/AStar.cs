@@ -9,21 +9,6 @@ namespace AStar
 {
   public class AStar
   {
-
-
-    public static List<Feld> FuegeFelderDerClosedListHinzu(Feld feldZumHinzufügen, List<Feld> closedList)
-    {
-      closedList.Add(feldZumHinzufügen);
-      return closedList;
-    }
-
-
-    //public static bool CheckIfZielGefunden(List<Feld> openList, Feld zielfeld)
-    //{
-    //  var result = openList.Any(feld => feld.X == zielfeld.X && feld.Y == zielfeld.Y);
-    //  return result;
-    //} //TODO: Machen !
-
     public static ZielSucheDTO CheckIfZielGefunden(List<Feld> openList, Feld zielfeld)
     {
       var zielsuchErgebnis = ZielsuchErgebnis.NichtGefunden;
@@ -48,7 +33,7 @@ namespace AStar
 
 
 
-    public static IEnumerable<Feld> GetBetretbareUmliegendeFelder(List<Feld> spielfeld, Feld currentFeld)
+    public static List<Feld> GetBetretbareUmliegendeFelder(List<Feld> spielfeld, Feld currentFeld)
     {
       var currentFieldX = currentFeld.X;
       var currentFieldY = currentFeld.Y;
@@ -63,31 +48,19 @@ namespace AStar
                                           f.Y >= minY && f.Y <= maxY).ToList();
 
       return nearestFields.Where(f => f.Feldtyp != Feldtyp.Hindernis &&
-                                      f.Feldtyp != Feldtyp.AktuellesFeld);
+                                      f.Feldtyp != Feldtyp.AktuellesFeld).ToList();
     }
 
-    public static Feld SetVorgaenger(Feld currentFeld, Feld vorgaengerFeld)
+    //TODO: Muss das wirklich eine Eigene Methode sein ? 
+    public static void SetVorgaenger(Feld currentFeld, Feld vorgaengerFeld)
     {
       currentFeld.Vorgaenger = vorgaengerFeld;
-      return currentFeld;
     }
 
-    public static List<Feld> CalulatePathScores(List<Feld> openList, Feld zielfed)
+    public static PathScoreDTO CalculateSinglePathScore(Feld zielFeld, Feld currentFeld)
     {
-      var kopieOpenList = new List<Feld>(openList);
-      foreach (var item in kopieOpenList)
-      {
-        item.G = CalculateGScore(item);
-        item.H = CalculateHScore(item, zielfed);
-        item.F = item.G + item.H;
-      }
-      return kopieOpenList;
-    }
-
-    public static PathScoreDTO CalculateSinglePathScore(Feld zielfeld, Feld aktuellesFeld)
-    {
-      var myG = CalculateGScore(aktuellesFeld);
-      var myH = CalculateHScore(aktuellesFeld, zielfeld);
+      var myG = CalculateGScore(currentFeld);
+      var myH = CalculateHScore(currentFeld, zielFeld);
 
       return new PathScoreDTO
       {
@@ -97,18 +70,18 @@ namespace AStar
       };
     }
 
-    private static int CalculateGScore(Feld feld)
+    private static int CalculateGScore(Feld currentFeld)
     {
       const int kostenHorizontalVertikal = 10;
       const int kostenDiagonal = 14;
 
-      return Helper.IsFeldDiagonalZumVorgaenger(feld) ? kostenDiagonal + feld.Vorgaenger.G : kostenHorizontalVertikal + feld.Vorgaenger.G;
+      return Helper.IsFeldDiagonalZumVorgaenger(currentFeld) ? kostenDiagonal + currentFeld.Vorgaenger.G : kostenHorizontalVertikal + currentFeld.Vorgaenger.G;
     }
 
-    private static int CalculateHScore(Feld feld, Feld zielFeld) //TODO: Was anders als Manhattan nehmen
+    private static int CalculateHScore(Feld currentFeld, Feld zielFeld)
     {
-      return 10 * (Math.Abs(zielFeld.X - feld.X) +
-                  Math.Abs(zielFeld.Y - feld.Y));
+      return 10 * (Math.Abs(zielFeld.X - currentFeld.X) +
+                  Math.Abs(zielFeld.Y - currentFeld.Y));
     }
 
 
