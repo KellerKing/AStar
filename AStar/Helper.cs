@@ -9,22 +9,7 @@ namespace AStar
 {
   public class Helper
   {
-    public static bool IsNeededFelderGesetzt(List<Feld> spielfeld)
-    {
-      int anzahlGueltigerFelder = 0;
-
-      foreach (var feld in spielfeld)
-      {
-        if (feld.Feldtyp == Feldtyp.Zielfeld || feld.Feldtyp == Feldtyp.AktuellesFeld)
-          anzahlGueltigerFelder++;
-
-        if (anzahlGueltigerFelder == 2)
-          return true;
-      }
-      return false;
-    }
-
-    public static Tuple<int, int> CalculateWindowSize(int anzahlFelderProAchse, int padding, int feldSize) //TODO: Extra needed space ? 
+    public static Tuple<int, int> CalculateWindowSize(int anzahlFelderProAchse, int padding, int feldSize)
     {
       var neededHeight = anzahlFelderProAchse * feldSize + (2 * padding) + 40;
       var neededWidht = anzahlFelderProAchse * feldSize + (2 * padding) + 120;
@@ -32,7 +17,7 @@ namespace AStar
       return Tuple.Create(neededWidht, neededHeight);
     }
 
-    public static bool IsFeldDiagonalZumVorgaenger(Feld feld)//TODO: Das geht bestimmt auch mit Mathe ? 
+    public static bool IsFeldDiagonalZumVorgaenger(Feld feld)
     {
       var vorgaengerX = feld.Vorgaenger.X;
       var vorgaengerY = feld.Vorgaenger.Y;
@@ -44,7 +29,7 @@ namespace AStar
       else return false;
     }
 
-    public static List<Feld> ResetSpielfeld(List<Feld> m_Spielfeld)
+    public static List<Feld> ResetSpielfeld(List<Feld> m_Spielfeld) //TODO: Muss ich das wirklich mit Return machen, oder mache ich alles mit byRef
     {
       foreach (var feld in m_Spielfeld)
       {

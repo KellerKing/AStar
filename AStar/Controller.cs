@@ -59,8 +59,8 @@ namespace AStar
 
     private void SetZufaelligesFeld()
     {
-      m_Spielfeld = Helper.ResetSpielfeld(m_Spielfeld);
-      m_Spielfeld = RandomMapGenerator.GenerateRandomMap(m_Spielfeld, 50);
+      m_Spielfeld = Helper.ResetSpielfeld(new List<Feld>(m_Spielfeld));
+      m_Spielfeld = RandomMapGenerator.GenerateRandomMap(new List<Feld>(m_Spielfeld), 50);
     }
 
     private void StatusFeldSetzen(Feld currentFeld, Feldtyp currentFeldtyp)
