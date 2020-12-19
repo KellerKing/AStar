@@ -10,8 +10,9 @@ namespace AStar
     public Action<Feld, Feldtyp> FeldClicked;
     public Action ZumZielButtonClicked;
     public Action ClearButtonClicked;
+    public Action BtnZufaelligesSpielfedClicked;
 
-    private List<meinRadioButton> radioButtons;
+    private List<MeinRadioButton> radioButtons;
 
     public MainForm()
     {
@@ -38,28 +39,23 @@ namespace AStar
       FeldClicked.Invoke(currentFeld, currentFeldtyp);
     }
 
-    public static DialogResult ZeigeSpielBeendenDialog(string ausgabenachricht)
+    public DialogResult ZeigeSpielBeendenDialog(string ausgabenachricht)
     {
       MessageBoxButtons buttons = MessageBoxButtons.YesNo;
       DialogResult result = MessageBox.Show(ausgabenachricht,"", buttons);
       return result;
     }
 
-    internal void SetRadioButtons(List<meinRadioButton> radButtons)
+    internal void SetRadioButtons(List<MeinRadioButton> radButtons)
     {
       this.radioButtons = radButtons;
       radioButtons.First().Checked = true;
       this.Controls.AddRange(radButtons.ToArray());
     }
 
-    internal void SetZumZielButton(Button zumZielButton)
+    public void SetButtons(List<Button> dieButtons)
     {
-      this.Controls.Add(zumZielButton);
-    }
-
-    public void SetClearButton(Button clearButton)
-    {
-      this.Controls.Add(clearButton);
+      this.Controls.AddRange(dieButtons.ToArray());
     }
 
     internal void SetzStatusRadioButtons(bool aktivStatus)
@@ -78,6 +74,11 @@ namespace AStar
     public void btnClear_Click(object sender, EventArgs e)
     {
       ClearButtonClicked.Invoke();
+    }
+
+    public void btnZufaelligesSpielfed_Click(object sender, EventArgs e)
+    {
+      BtnZufaelligesSpielfedClicked.Invoke();
     }
   }
 }

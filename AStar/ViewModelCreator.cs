@@ -27,8 +27,8 @@ namespace AStar
       return new Feld
       {
         BackColor = Color.AliceBlue,
-        X = xInArray,
-        Y = yInArray,
+        myPosX = xInArray,
+        myPosY = yInArray,
         Location = new Point(xInArray * size + padding, yInArray * size + padding),
         Size = new Size(size, size),
         Feldtyp = Feldtyp.Normal,
@@ -54,13 +54,21 @@ namespace AStar
           Location = new Point(locationX, locationY + padding + 25),
           Size = new Size(80,25),
           TextAlign = ContentAlignment.MiddleCenter
+        },
+        new Button
+        {
+          Name = "btnZufaelligesSpielfeld",
+          Text = "Zufall",
+          Location = new Point(locationX, locationY + padding *2 + 50),
+          Size = new Size(80,25),
+          TextAlign = ContentAlignment.MiddleCenter
         }
       };
     }
 
-    public static List<meinRadioButton> GetRadioButtons(int lastButtonXValue, int yValue, int padding)
+    public static List<MeinRadioButton> GetRadioButtons(int lastButtonXValue, int yValue, int padding)
     {
-      var output = new List<meinRadioButton>();
+      var output = new List<MeinRadioButton>();
       string[] name = new string[] { "Startfeld", "Zielfeld", "Hindernis", "Normal" };
       Feldtyp[] feldtyp = new Feldtyp[] { Feldtyp.AktuellesFeld, Feldtyp.Zielfeld, Feldtyp.Hindernis, Feldtyp.Normal };
 
@@ -70,9 +78,9 @@ namespace AStar
       return output;
     }
 
-    private static meinRadioButton CreateRadioButton(int x, int y, string name, Feldtyp feldtyp)
+    private static MeinRadioButton CreateRadioButton(int x, int y, string name, Feldtyp feldtyp)
     {
-      return new meinRadioButton
+      return new MeinRadioButton
       {
         Name = "rb" + name,
         Location = new Point(x, y),

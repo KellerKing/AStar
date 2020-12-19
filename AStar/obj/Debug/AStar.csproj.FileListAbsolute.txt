@@ -71,7 +71,6 @@ H:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\ASta
 D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\bin\Debug\AStar.exe.config
 D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\bin\Debug\AStar.exe
 D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\bin\Debug\AStar.pdb
-D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.csprojAssemblyReference.cache
 D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.MainForm.resources
 D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.Properties.Resources.resources
 D:\Berufliche Schule Bretten\01SAE\02Jahr\AStar_Luca Keller\AStar\obj\Debug\AStar.csproj.GenerateResource.cache
