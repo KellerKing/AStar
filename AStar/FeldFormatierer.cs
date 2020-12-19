@@ -16,7 +16,7 @@ namespace AStar
       {
         FormatiereAlsStandardfeld(currentFeld);
       }
-      else
+      else //Wenn Startfeld oder Zielfeld gestzt werden muss geschaut werden ob es die schon gibt, und wenn ja das alte erst entfernen
       {
         var oldSpecialFeld = spielfeld.FirstOrDefault(feld => feld.Feldtyp == currentFeldtyp);
 
@@ -28,7 +28,7 @@ namespace AStar
       }
     }
 
-    public static void FormatiereStartOderZielfeld(Feld currentFeld, Feldtyp currentFeldtyp) //TODO: Komplettes Rework 
+    public static void FormatiereStartOderZielfeld(Feld currentFeld, Feldtyp currentFeldtyp)  
     {
       currentFeld.Feldtyp = currentFeldtyp;
 
@@ -60,7 +60,7 @@ namespace AStar
       derPfad.ForEach(feld =>
       {
         feld.BackColor = Color.Blue;
-        feld.Feldtyp = Feldtyp.Pfad;
+        feld.Feldtyp = Feldtyp.FinalerPfad;
       });
     }
   }

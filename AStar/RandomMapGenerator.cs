@@ -8,14 +8,13 @@ namespace AStar
 {
   class RandomMapGenerator
   {
-    public static List<Feld> GenerateRandomMap(List<Feld> spielfeld, int hindernisrateInProzent) //TODO: Rework alles
+    public static void GenerateRandomMap(List<Feld> spielfeld, int hindernisrateInProzent)
     {
       var r = new Random();
 
       SetRandomStartOderZielfeld(spielfeld, r, Feldtyp.AktuellesFeld);
       SetRandomStartOderZielfeld(spielfeld, r, Feldtyp.Zielfeld);
       SetRandomHindernisse(spielfeld, hindernisrateInProzent, r);
-      return spielfeld;
     }
 
     private static void SetRandomStartOderZielfeld(List<Feld> spielfeld, Random r, Feldtyp feldtyp)

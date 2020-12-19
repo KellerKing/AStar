@@ -1,8 +1,7 @@
 ﻿using AStar.Konstanten;
+using AStar.Logik;
 using AStar.Transferobjekte;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,50 +9,44 @@ namespace AStar
 {
   class Pfadfinder
   {
-    public static async Task<ZielSucheDTO> GeheKomplettenWeg(List<Feld> spielfeld, List<Feld> openList, List<Feld> closedList, Feld startfeld, Feld zielfeld)
+    public static async Task<ZielSucheDTO> FindeWegZumZiel(List<Feld> spielfeld, List<Feld> openList, List<Feld> closedList, Feld startfeld, Feld zielfeld)
     {
       var currentFeld = startfeld;
       openList.Add(currentFeld);
-      var zielgefundenPruefergebnis = AStar.CheckIfZielGefunden(openList, zielfeld);
+      var zielgefundenPruefergebnis = ZielChecker.CheckIfZielGefunden(openList, zielfeld, currentFeld);
 
-      while (zielgefundenPruefergebnis.ZielsuchErgebnis == ZielsuchErgebnis.NichtGefunden)//TODO: Next STep
+      while (zielgefundenPruefergebnis.ZielsuchErgebnis == ZielsuchErgebnis.NichtGefunden)
       {
         currentFeld = GetNeuesAktuellesFeld(openList);
-        var grenzendeFelder = AStar.GetBetretbareUmliegendeFelder(spielfeld, currentFeld);
-        var grenzendeFelderAußerhalbClosedList = EntferneGrenzendeFelderDieBereitsInClosedListSind(closedList, grenzendeFelder);
- 
-        BerechnePfadKostenUndSetzeVorgaenger(grenzendeFelderAußerhalbClosedList, currentFeld, zielfeld);
-        FuegeFelderAusserhalbOpenListDieserHinzu(openList, grenzendeFelderAußerhalbClosedList);
-        AddCurrentFeldZurClosedListUndEntferneVonOpenList(closedList, openList);
+        MacheSchritt(spielfeld, openList, closedList, currentFeld, zielfeld);
 
-        zielgefundenPruefergebnis = AStar.CheckIfZielGefunden(openList, zielfeld);
+        zielgefundenPruefergebnis = ZielChecker.CheckIfZielGefunden(openList, zielfeld, currentFeld);
 
       }
-      var derFinalePfad = GetFinalenPfad(currentFeld);
-      FeldFormatierer.FormatiereFinalenPfad(derFinalePfad);
-      //FeldFormatierer.FormatiereBerechneteFelder(openList);
-
       return zielgefundenPruefergebnis;
     }
 
-    private static List<Feld> GetFinalenPfad(Feld lastFeld)
-    {
-      List<Feld> output = new List<Feld>();
 
-      while(lastFeld.Vorgaenger != null)
-      {
-        output.Add(lastFeld);
-        lastFeld = lastFeld.Vorgaenger;
-      }
-      return output;
+    private static void MacheSchritt(List<Feld> spielfeld, List<Feld> openList, List<Feld> closedList, Feld currentFeld, Feld zielfeld)
+    {
+      var grenzendeFelder = Helper.GetBetretbareUmliegendeFelder(spielfeld, currentFeld);
+      var grenzendeFelderAußerhalbClosedList = EntferneGrenzendeFelderDieBereitsInClosedListSind(closedList, grenzendeFelder);
+      BerechnePfadKostenUndSetzeVorgaenger(grenzendeFelderAußerhalbClosedList, currentFeld, zielfeld);
+      FuegeFelderAusserhalbOpenListDieserHinzu(openList, grenzendeFelderAußerhalbClosedList);
+      AddCurrentFeldZurClosedListUndEntferneVonOpenList(closedList, openList);
     }
+
 
     private static void FuegeFelderAusserhalbOpenListDieserHinzu(List<Feld> openList, List<Feld> grenzendeFelder)
     {
 
       var eintraegeAusserhalbOpenList = new List<Feld>();
 
-      grenzendeFelder.ForEach(x => { if (!openList.Contains(x)) eintraegeAusserhalbOpenList.Add(x); });
+      grenzendeFelder.ForEach(feld => { 
+        if (!openList.Contains(feld)) 
+          eintraegeAusserhalbOpenList.Add(feld); 
+      });
+
       openList.AddRange(eintraegeAusserhalbOpenList);
     }
 
@@ -72,25 +65,25 @@ namespace AStar
       return ouptut;
     }
 
-    public static void BerechnePfadKostenUndSetzeVorgaenger(List<Feld> grenzendeFelder, Feld currentFeld, Feld zielFeld) //TODO: Ich glaube hier ist der FEHLER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+    public static void BerechnePfadKostenUndSetzeVorgaenger(List<Feld> grenzendeFelder, Feld currentFeld, Feld zielFeld) 
     {
       foreach (var grenzendesFeld in grenzendeFelder)
       {
         if (grenzendesFeld.Vorgaenger == null)
         {
-          AStar.SetVorgaenger(grenzendesFeld, currentFeld);
-          var pfadkosten = AStar.CalculateSinglePathScore(zielFeld, grenzendesFeld);
+          Helper.SetVorgaenger(grenzendesFeld, currentFeld);
+          var pfadkosten = PathscoreBerechner.CalculateSinglePathScore(zielFeld, grenzendesFeld);
           grenzendesFeld.G = pfadkosten.G;
           grenzendesFeld.H = pfadkosten.H;
           grenzendesFeld.F = pfadkosten.F;
         }
         else
         {
-          var neuerGWert = AStar.CalculateSinglePathScore(zielFeld, grenzendesFeld).G;
+          var neuerGWert = PathscoreBerechner.CalculateSinglePathScore(zielFeld, grenzendesFeld).G;
 
           if (neuerGWert < grenzendesFeld.G)
           {
-            AStar.SetVorgaenger(grenzendesFeld, currentFeld);
+            Helper.SetVorgaenger(grenzendesFeld, currentFeld);
             grenzendesFeld.G = neuerGWert;
             grenzendesFeld.F = grenzendesFeld.G + grenzendesFeld.H;
           }
@@ -102,6 +95,7 @@ namespace AStar
     {
 
       var currentFeld = openList.First(f => f.Feldtyp == Feldtyp.AktuellesFeld);
+
       currentFeld.Feldtyp = Feldtyp.Normal;
       closedList.Add(currentFeld);
       openList.Remove(currentFeld);

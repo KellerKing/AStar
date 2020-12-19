@@ -39,7 +39,7 @@ namespace AStar
       FeldClicked.Invoke(currentFeld, currentFeldtyp);
     }
 
-    public static DialogResult ZeigeSpielBeendenDialog(string ausgabenachricht)
+    public DialogResult ZeigeSpielBeendenDialog(string ausgabenachricht)
     {
       MessageBoxButtons buttons = MessageBoxButtons.YesNo;
       DialogResult result = MessageBox.Show(ausgabenachricht,"", buttons);

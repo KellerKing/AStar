@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AStar
 {
@@ -19,23 +16,52 @@ namespace AStar
 
     public static bool IsFeldDiagonalZumVorgaenger(Feld feld)
     {
-      var vorgaengerX = feld.Vorgaenger.X;
-      var vorgaengerY = feld.Vorgaenger.Y;
+      var vorgaengerX = feld.Vorgaenger.myPosX;
+      var vorgaengerY = feld.Vorgaenger.myPosY;
 
-      if (vorgaengerX == feld.X - 1 && vorgaengerY == feld.Y - 1) return true;
-      else if (vorgaengerX == feld.X + 1 && vorgaengerY == feld.Y - 1) return true;
-      else if (vorgaengerX == feld.X + 1 && vorgaengerY == feld.Y + 1) return true;
-      else if (vorgaengerX == feld.X - 1 && vorgaengerY == feld.Y + 1) return true;
+      if (vorgaengerX == feld.myPosX - 1 && vorgaengerY == feld.myPosY - 1) return true;
+      else if (vorgaengerX == feld.myPosX + 1 && vorgaengerY == feld.myPosY - 1) return true;
+      else if (vorgaengerX == feld.myPosX + 1 && vorgaengerY == feld.myPosY + 1) return true;
+      else if (vorgaengerX == feld.myPosX - 1 && vorgaengerY == feld.myPosY + 1) return true;
       else return false;
     }
 
-    public static void ResetSpielfeld(List<Feld> m_Spielfeld) //TODO: Muss ich das wirklich mit Return machen, oder mache ich alles mit byRef
+
+    public static List<Feld> GetBetretbareUmliegendeFelder(List<Feld> spielfeld, Feld currentFeld)
     {
-      foreach (var feld in m_Spielfeld)
-      {
-        feld.BackColor = Color.AliceBlue;
-        feld.Feldtyp = Feldtyp.Normal;
-      }
+      var currentFieldX = currentFeld.myPosX;
+      var currentFieldY = currentFeld.myPosY;
+
+      var maxX = Math.Min(spielfeld.Max(f => f.myPosX), currentFieldX + 1);
+      var minX = Math.Max(currentFieldX - 1, 0);
+
+      var maxY = Math.Min(spielfeld.Max(f => f.myPosY), currentFieldY + 1);
+      var minY = Math.Max(currentFieldY - 1, 0);
+
+      var nearestFields = spielfeld.Where(f => f.myPosX >= minX && f.myPosX <= maxX &&
+                                          f.myPosY >= minY && f.myPosY <= maxY).ToList();
+
+      return nearestFields.Where(f => f.Feldtyp != Feldtyp.Hindernis &&
+                                      f.Feldtyp != Feldtyp.AktuellesFeld).ToList();
     }
+
+    public static void SetVorgaenger(Feld currentFeld, Feld vorgaengerFeld)
+    {
+      currentFeld.Vorgaenger = vorgaengerFeld;
+    }
+
+
+    public static List<Feld> GetFinalenPfad(Feld lastFeld)
+    {
+      List<Feld> output = new List<Feld>();
+
+      while (lastFeld.Vorgaenger != null)
+      {
+        output.Add(lastFeld);
+        lastFeld = lastFeld.Vorgaenger;
+      }
+      return output;
+    }
+
   }
 }

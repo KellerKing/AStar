@@ -27,8 +27,8 @@ namespace AStar
       return new Feld
       {
         BackColor = Color.AliceBlue,
-        X = xInArray,
-        Y = yInArray,
+        myPosX = xInArray,
+        myPosY = yInArray,
         Location = new Point(xInArray * size + padding, yInArray * size + padding),
         Size = new Size(size, size),
         Feldtyp = Feldtyp.Normal,

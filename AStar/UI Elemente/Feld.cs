@@ -6,8 +6,8 @@ namespace AStar
 {
     public class Feld : Button
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int myPosX { get; set; }
+        public int myPosY { get; set; }
 
         public Feldtyp Feldtyp { get; set; }
 
@@ -17,22 +17,5 @@ namespace AStar
 
         public Feld Vorgaenger { get; set; }
 
-
-
-        public static Feld Copy(Feld sourceFeld)
-        {
-            var copiedFeld = new Feld
-            {
-                X = sourceFeld.X,
-                Y = sourceFeld.Y,
-                Feldtyp = sourceFeld.Feldtyp,
-                G = sourceFeld.G,
-                H = sourceFeld.H,
-                F = sourceFeld.F,
-                Vorgaenger = sourceFeld.Vorgaenger
-            };
-
-            return copiedFeld;
-        }
     }
 }

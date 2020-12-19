@@ -1,8 +1,7 @@
-﻿using System;
+﻿using AStar.Logik;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -11,8 +10,8 @@ namespace AStar
   class Controller
   {
     private List<Feld> m_Spielfeld;
-    private List<Feld> m_OpenList = new List<Feld>(); //Bekommt Felder die geprüft werden müssen
-    private List<Feld> m_ClosedList = new List<Feld>(); //Bereits begangene Felder
+    private List<Feld> m_OpenList = new List<Feld>();
+    private List<Feld> m_ClosedList = new List<Feld>(); 
     private MainForm m_MainForm;
 
     public Controller(MainForm mainForm)
@@ -23,13 +22,13 @@ namespace AStar
 
     private void InitForm()
     {
-      var felderProAchse = 12;
-      m_Spielfeld = ViewModelCreator.GetSpielfeld(felderProAchse); //TODO: Feldgröße automatisch berechnen
-      var lastField = m_Spielfeld.First(feld => feld.X == felderProAchse - 1 && feld.Y == felderProAchse - 1);
-      var radButtons = ViewModelCreator.GetRadioButtons(lastField.Width + lastField.Location.X, lastField.Y, 20);
+      var felderProAchse = 16;
+      m_Spielfeld = ViewModelCreator.GetSpielfeld(felderProAchse); 
+      var lastField = m_Spielfeld.First(feld => feld.myPosX == felderProAchse - 1 && feld.myPosY == felderProAchse - 1);
+      var radButtons = ViewModelCreator.GetRadioButtons(lastField.Width + lastField.Location.X, lastField.myPosY, 20);
       var uiButtons = ViewModelCreator.GetButtons(radButtons.Last().Location.X, radButtons.Last().Location.Y, 40);
 
-      var formSize = Helper.CalculateWindowSize(Convert.ToInt32(Math.Sqrt(m_Spielfeld.Count)), 20, 25); //TODO Naming und Klasse mit Groeßsen.
+      var formSize = Helper.CalculateWindowSize(Convert.ToInt32(Math.Sqrt(m_Spielfeld.Count)), 20, 25); 
 
       SetzeUIFelder(uiButtons, formSize, radButtons);
       ConnectEvents(uiButtons);
@@ -57,20 +56,12 @@ namespace AStar
       m_MainForm.BtnZufaelligesSpielfedClicked += SetZufaelligesFeld;
     }
 
-    private void SetZufaelligesFeld()
-    {
-      //TODO: Oder auch nur als ref
-      m_Spielfeld = RandomMapGenerator.GenerateRandomMap(new List<Feld>(m_Spielfeld), 50);
-    }
+    private void SetZufaelligesFeld() => RandomMapGenerator.GenerateRandomMap(m_Spielfeld, 50);
 
-    private void StatusFeldSetzen(Feld currentFeld, Feldtyp currentFeldtyp)
-    {
-      FeldFormatierer.SetSpecialFeld(m_Spielfeld, currentFeld, currentFeldtyp);
-    }
-    private void BtnClearClicked()
-    {
-      Application.Restart();
-    }
+    private void StatusFeldSetzen(Feld currentFeld, Feldtyp currentFeldtyp) => FeldFormatierer.SetSpecialFeld(m_Spielfeld, currentFeld, currentFeldtyp);
+    
+    private void BtnClearClicked() => Application.Restart();
+
 
     private async void BtnZumZielClicked()
     {
@@ -79,11 +70,16 @@ namespace AStar
 
       if (startfeld == null || zielfeld == null) return;
 
-      //TODO: Wie geht es weiter ? 
-      var zielsucheErgebnis = await Task.Run(() => Pfadfinder.GeheKomplettenWeg(m_Spielfeld, m_OpenList, m_ClosedList, startfeld, zielfeld));
+      var zielsucheErgebnis = await Task.Run(() => Pfadfinder.FindeWegZumZiel(m_Spielfeld, m_OpenList, m_ClosedList, startfeld, zielfeld));
 
-      MessageBox.Show(zielsucheErgebnis.Ausgabetext); //TODO: Hier das dann auslagern
-      Application.Restart();
+      await Task.Run(() => ZielChecker.FormatiereFallsPfadGefunden(zielsucheErgebnis));
+
+      var neustartAntwort = m_MainForm.ZeigeSpielBeendenDialog(zielsucheErgebnis.Ausgabetext);
+
+      if (neustartAntwort == DialogResult.Yes)
+        Application.Exit();
+      else
+        Application.Restart();
     }
   }
 }
