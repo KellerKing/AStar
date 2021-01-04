@@ -58,14 +58,6 @@ namespace AStar
       this.Controls.AddRange(dieButtons.ToArray());
     }
 
-    internal void SetzStatusRadioButtons(bool aktivStatus)
-    {
-      foreach (var radButton in radioButtons)
-      {
-        radButton.Enabled = aktivStatus;
-      }
-    }
-
     public void btnKomplett_Click(object sender, EventArgs e)
     {
       ZumZielButtonClicked.Invoke();
